@@ -1,0 +1,467 @@
+<!doctype html>
+
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="shortcut icon" href="/favicon.ico">
+  <title>技术论坛</title>
+  <!-- 导入CSS -->
+  <link href="./dist/css/tabler.min.css?1674944402" rel="stylesheet" />
+  <link rel="stylesheet" href="./dist/css/jquery.toast.css">
+  <link rel="stylesheet" href="./dist/editor.md/css/editormd.min.css">
+  <!-- 设置字体 -->
+  <!-- <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+    </style> -->
+</head>
+
+<body>
+  <!-- page 页面开始 -->
+  <div class="page">
+    <!-- 头部 导航 开始 -->
+    <header class="navbar navbar-expand-md navbar-light d-print-none">
+      <div class="container-xl">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
+          aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- 导航左侧 logo 按钮 -->
+        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+          <a href="#">
+            <img src="./image/img3.png" width="32" height="32" alt="Tabler" class="navbar-brand-image me-3">
+          技术论坛
+          </a>
+        </h1>
+        <!-- 导航右侧 -->
+        <div class="navbar-nav flex-row order-md-last">
+          <!-- 搜索框 -->
+          <div class="nav-item d-none d-md-flex me-3">
+            <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+            </div>
+          </div>
+          <!-- 主题样式日夜转换 -->
+          <div class="d-none d-md-flex">
+            <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="切换至夜间模式" data-bs-toggle="tooltip"
+              data-bs-placement="bottom">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+              </svg>
+            </a>
+            <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="切换至白天模式" data-bs-toggle="tooltip"
+              data-bs-placement="bottom">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
+              </svg>
+            </a>
+
+            <!-- 小铃铛，站内信 -->
+            <!-- 小铃铛，站内信 -->
+            <div class="nav-item dropdown d-none d-md-flex me-3">
+              <a class="nav-link px-0" data-bs-toggle="offcanvas" href="#index_message_offcanvasEnd"
+                aria-controls="offcanvasEnd">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                  stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
+                  <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+                </svg>
+                <!-- 小红点 -->
+                <span class="badge bg-red"></span>
+              </a>
+            </div>
+          </div>
+
+          <!-- 用户信息 -->
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+              aria-label="Open user menu">
+              <!-- 用户头像，也可以用img标签 -->
+              <span id="index_nav_avatar" class="avatar avatar-sm"
+                style="background-image: url(./image/avatar01.jpeg)"></span>
+              <div class="d-none d-xl-block ps-2">
+                <!-- 用户名 -->
+                <div id="index_nav_nickname"></div>
+                <!-- 副标题 -->
+                <div id="index_nav_name_sub" class="mt-1 small text-muted"></div>
+              </div>
+            </a>
+            <!-- 下拉菜单 -->
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <a href="javascript:void(0);" id="index_user_profile" class="dropdown-item">我的帖子</a>
+              <a href="javascript:void(0);" id="index_user_settings" class="dropdown-item">个人中心</a>
+              <!-- <a href="#" class="dropdown-item">状态</a> -->
+              <!-- <a href="#" class="dropdown-item">生成二唯码</a> -->
+              <div class="dropdown-divider"></div>
+              <a id="index_user_logout" href="javascript:void(0);" class="dropdown-item"><span
+                  class="text-red">退出</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 论坛版块导航 -->
+    <header class="navbar-expand-md">
+      <div class="collapse navbar-collapse" id="navbar-menu">
+        <div class="navbar navbar-light">
+          <div class="container-xl">
+            <ul id="topBoardList" class="navbar-nav">
+              <li class="nav-item active" id="nav_board_index">
+                <!-- 首页 -->
+                <a class="nav-link" href="javascript:void(0);">
+                  <span
+                    class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                      stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path
+                        d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+                    </svg>
+                  </span>
+                  <span class="nav-link-title">
+                    首页
+                  </span>
+                </a>
+              </li>
+              <!-- 其他版块动态生成 -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- 头部 导航 结束 -->
+    <!-- 正文 开始 -->
+    <div class="page-wrapper" id="page-wrapper">
+      <!-- 正文部分动态加载 -->
+      <div id="bit-forum-content">
+
+      </div>
+
+      <!-- 站内信区域 开始 -->
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="index_message_offcanvasEnd"
+        aria-labelledby="offcanvasEndLabel" style="width: 650px">
+        <div class="offcanvas-header">
+          <h2 class="offcanvas-title" id="offcanvasEndLabel">所有站内信</h2>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="list-group list-group-flush list-group-hoverable">
+            <!-- 每一条记录 -->
+            <div class="list-group-item">
+              <div class="row align-items-center">
+                <div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span></div>
+                <div class="col text-truncate">
+                  <a href="#" class="text-body d-block">未读</a>
+                  <div class="d-block text-muted text-truncate mt-n1">
+                    Change deprecated html tags to text decoration classes (#29604)
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <a href="#" class="list-group-item-actions">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted bi bi-reply" width="24" height="24"
+                      fill="currentColor" viewBox="0 0 16 16">
+                      <path
+                        d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- 每一条记录 -->
+            <div class="list-group-item">
+              <div class="row align-items-center">
+                <div class="col-auto"><span class="status-dot d-block"></span></div>
+                <div class="col text-truncate">
+                  <a href="#" class="text-body d-block">已读</a>
+                  <div class="d-block text-muted text-truncate mt-n1">
+                    justify-content:between ⇒ justify-content:space-between (#29734)
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <a href="#" class="list-group-item-actions">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted bi bi-reply" width="24" height="24"
+                      fill="currentColor" viewBox="0 0 16 16">
+                      <path
+                        d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <div class="row align-items-center">
+                <div class="col-auto"><span class="status-dot d-block"></span></div>
+                <div class="col text-truncate">
+                  <a href="#" class="text-body d-block">已读</a>
+                  <div class="d-block text-muted text-truncate mt-n1">
+                    Update change-version.js (#29736)
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <a href="#" class="list-group-item-actions">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted bi bi-reply" width="24" height="24"
+                      fill="currentColor" viewBox="0 0 16 16">
+                      <path
+                        d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="list-group-item">
+              <div class="row align-items-center">
+                <div class="col-auto"><span class="status-dot status-dot-animated bg-green d-block"></span></div>
+                <div class="col text-truncate">
+                  <a href="#" class="text-body d-block">已回复</a>
+                  <div class="d-block text-muted text-truncate mt-n1">
+                    Regenerate package-lock.json (#29730)
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <a href="#" class="list-group-item-actions">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted bi bi-reply" width="24" height="24"
+                      fill="currentColor" viewBox="0 0 16 16">
+                      <path
+                        d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- 站内信列表结束 -->
+          </div>
+        </div>
+      </div>
+      <!-- 站内信区域 结束 -->
+      <!-- 页脚 开始 -->
+      <footer class="footer footer-transparent d-print-none align-self-center">
+        <div class="container-xl">
+          <div class="row text-center align-items-center">
+            <div class="col-lg-auto ms-lg-auto">
+              <ul class="list-inline list-inline-dots mb-0">
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- 页脚 结束 -->
+      </footer>
+    </div>
+
+    <!-- page 页面结束 -->
+  </div>
+</body>
+<!-- 导入JS -->
+<script src="./dist/js/tabler.min.js"></script>
+<script src="./dist/js/theme.min.js"></script>
+<script src="./dist/js/jquery-3.6.3.min.js"></script>
+<script src="./dist/js/jquery.toast.js"></script>
+<script src="./js/common.js"></script>
+<!-- 编辑器 -->
+<script src="./dist/editor.md/editormd.min.js"></script>
+<script src="./dist/editor.md/lib/marked.min.js"></script>
+<script src="./dist/editor.md/lib/prettify.min.js"></script>
+<script>
+  $(function () {
+    //========================= 获取用户信息 =======================
+    $.ajax({
+      // 请求的类型
+      type: 'get',
+      url: 'user/info',
+      // 回调
+      success: function (respData) {
+       
+        if (respData.code == 0) {
+          // 在响应数据中获取用户的信息
+          let user = respData.data;
+          currentUserId = user.id;
+          console.log(user);
+          // 设置用户名
+          $('#index_nav_nickname').html(user.nickname);
+          // 设置副标题
+          if (user.isAdmin == 1) {
+            $('#index_nav_name_sub').html('管理员');
+          } else {
+            $('#index_nav_name_sub').html('普通用户');
+          }
+          // 设置头像
+          if (!user.avatarUrl) {
+            if(user.gender==0){
+               user.avatarUrl = './image/avatar02.jpeg';
+            }else{
+              user.avatarUrl = './image/avatar03.jpeg';
+            }
+           
+          }
+          $('#index_nav_avatar').css('background-image', 'url(' + user.avatarUrl + ')');
+
+        } else {
+          // 失败时提示错误信息
+          $.toast({
+            heading: '提示',
+            text: respData.message,
+            icon: 'info'
+          });
+        }
+      },
+      error: function (respData) {
+        // 失败时提示错误信息
+        $.toast({
+          heading: '错误',
+          text: respData.message,
+          icon: 'error'
+        });
+      }
+
+    });
+
+    //========================= 获取版块信息 =======================
+    // 成功响应后调用buildTopBoard(respData.data);方法构造版块
+    $.ajax({
+      // 请求类型
+      type: 'get',
+      url: 'board/topList',
+      // 处理回调
+      success: function (respData) {
+        if (respData.code == 0) {
+          // 成功时，处理页面结构
+          buildTopBoard(respData.data);
+        } else {
+          // 失败时提示错误信息
+          $.toast({
+            heading: '提示',
+            text: respData.message,
+            icon: 'info'
+          });
+        }
+      },
+      error: function (respData) {
+        // 失败时提示错误信息
+        $.toast({
+          heading: '错误',
+          text: respData.message,
+          icon: 'error'
+        });
+      }
+    });
+
+    //========================= 构造首页版块=======================
+    // 构造首页版块
+    function buildTopBoard(data) {
+      // 版块导航
+      let navBoardListEl = $('#topBoardList');
+      // 遍历版块
+      data.forEach(board => {
+        // 构建版块
+        let itemHtml = '<li class="nav-item">'
+          + '<a class="nav-link" href="javascript:void(0);">'
+          + '<span class="nav-link-icon d-md-none d-lg-inline-block">'
+          + '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-point-filled" width="24"'
+          + 'height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"'
+          + 'stroke-linecap="round" stroke-linejoin="round">'
+          + '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>'
+          + '<path d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"'
+          + 'stroke-width="0" fill="currentColor"></path>'
+          + '</svg>'
+          + '</span>'
+          + '<span class="nav-link-title">'
+          + board.name
+          + '</span>'
+          + '</a>'
+          + '</li>'
+        // 为版块绑定当前版块数据对象以便后续获取
+        let boardItem = $(itemHtml);
+        // 把版块信息绑定到当前导航单元
+        boardItem.data('board', board);
+        console.log('data = ' + boardItem.data('board').name + ', id = ' + boardItem.data('board').id);
+        // 处理点击事件
+        boardItem.click(function () {
+          // alert('data = ' + boardItem.data('board').name + ', id = ' + boardItem.data('board').id);
+          // 激活效果
+          changeNavActive(boardItem);
+        });
+        // 加入版块导航
+        navBoardListEl.append(boardItem);
+      });
+    }
+
+    // ========================= 绑定导航栏中首页点击事件 =======================
+    $('#nav_board_index').click(function () {
+      // 激活效果
+      changeNavActive($(this));
+    });
+
+
+    // ========================= 起始页而加载首页帖子列表 ========================= 
+    buildArticleList();
+
+
+    // ============================ 处理个设置中心点击事件 ===========================
+    $('#index_user_settings').click(function () {
+      console.log('加载设置中心页面');
+     
+      removeNavActive();
+      $('#bit-forum-content').load('settings.html');
+    });
+
+    // ============================ 处理个人中心点击事件 ===========================
+    $('#index_user_profile').click(function () {
+      console.log('加载个人中心页面');
+        // 清空要查看的用户Id，表示要查看的是自己
+        profileUserId = undefined;
+      removeNavActive();
+      $('#bit-forum-content').load('profile.html');
+    });
+ 
+     // ============================ 处理gitee点击事件 ===========================
+     $('.link-secondary').click(function () {
+      console.log('gitee点击');
+      alert("获取源码联系QQ:3089412683");
+    });
+
+    // ============================ 处理退出登录点击事件 ===========================
+    $('#index_user_logout').click(function () {
+      $.ajax({
+        type:'get',
+        url:'/user/logout',
+        success:function(data){
+          if(data.code==0){
+            location.assign('sign-in.html');
+          }else{
+            $.toast({
+          heading: '错误',
+          text: respData.message,
+          icon: 'info'
+            });
+          }
+        },
+        error: function (respData) {
+        // 失败时提示错误信息
+        $.toast({
+          heading: '错误',
+          text: respData.message,
+          icon: 'error'
+        });
+      }
+
+
+      })
+
+    });
+  });
+</script>
+
+</html>

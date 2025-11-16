@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forum2.dao.ArticleMapper">
+    <resultMap extends="ResultMapWithBLOBs" id="AllInfoResultMap" type="com.example.forum2.model.Article" >
+
+        <association property="board" resultMap="com.example.forum2.dao.BoardMapper.BaseResultMap" columnPrefix="b_"/>
+        <association property="user" resultMap="com.example.forum2.dao.UserMapper.BaseResultMap" columnPrefix="u_"/>
+    </resultMap>
+    <select id="selectAll" resultMap="AllInfoResultMap">
+        select
+
+            u.id AS u_id,
+            u.nickname AS u_nickname,
+            u.gender AS u_gender,
+            u.avatarUrl AS u_avatarUrl,
+
+            b.id AS b_id,
+            b.name AS b_name,
+
+            a.id,
+            a.boardId,
+            a.userId,
+            a.title,
+            a.content,
+            a.visitCount,
+            a.replyCount,
+            a.likeCount,
+            a.state,
+            a.deleteState,
+            a.createTime,
+            a.updateTime
+
+            from t_board as b,t_article as a,t_user as u
+        where
+            a.userId=u.id and a.boardId=b.id
+          and
+            a.state=0 and a.deleteState=0
+          and
+            b.state=0 and b.deleteState=0
+
+        order by a.createTime desc
+
+    </select>
+    <select id="selectByBoardId"  parameterType="java.lang.Long" resultMap="AllInfoResultMap">
+        select
+
+            u.id AS u_id,
+            u.nickname AS u_nickname,
+            u.gender AS u_gender,
+            u.avatarUrl AS u_avatarUrl,
+
+            b.id AS b_id,
+            b.name AS b_name,
+
+            a.id,
+            a.boardId,
+            a.userId,
+            a.title,
+            a.content,
+            a.visitCount,
+            a.replyCount,
+            a.likeCount,
+            a.state,
+            a.deleteState,
+            a.createTime,
+            a.updateTime
+
+        from t_board as b,t_article as a,t_user as u
+        where
+            a.boardId = #{boardId,jdbcType=BIGINT} and
+            a.userId=u.id and
+            a.boardId=b.id and
+            a.state = 0 and
+            a.deleteState = 0 and
+            b.state=0 and
+            b.deleteState=0
+
+        order by a.createTime desc
+    </select>
+
+    <select id="selectDetailById"  parameterType="java.lang.Long" resultMap="AllInfoResultMap">
+        select
+
+            u.id AS u_id,
+            u.nickname AS u_nickname,
+            u.gender AS u_gender,
+            u.avatarUrl AS u_avatarUrl,
+
+            b.id AS b_id,
+            b.name AS b_name,
+
+            a.id,
+            a.boardId,
+            a.userId,
+            a.title,
+            a.content,
+            a.visitCount,
+            a.replyCount,
+            a.likeCount,
+            a.state,
+            a.deleteState,
+            a.createTime,
+            a.updateTime
+
+        from t_board as b,t_article as a,t_user as u
+        where
+            a.id = #{id,jdbcType=BIGINT} and
+            a.userId=u.id and
+            a.boardId=b.id and
+            a.state = 0 and
+            a.deleteState = 0 and
+            b.state=0 and
+            b.deleteState=0
+
+    </select>
+
+    <select id="selectByUserId"  parameterType="java.lang.Long" resultMap="AllInfoResultMap">
+        select
+
+            u.id AS u_id,
+            u.nickname AS u_nickname,
+            u.gender AS u_gender,
+            u.avatarUrl AS u_avatarUrl,
+
+            b.id AS b_id,
+            b.name AS b_name,
+
+            a.id,
+            a.boardId,
+            a.userId,
+            a.title,
+            a.content,
+            a.visitCount,
+            a.replyCount,
+            a.likeCount,
+            a.state,
+            a.deleteState,
+            a.createTime,
+            a.updateTime
+
+        from t_board as b,t_article as a,t_user as u
+        where
+            a.userId = #{userId,jdbcType=BIGINT} and
+            a.userId=u.id and
+            a.boardId=b.id and
+            a.state = 0 and
+            a.deleteState = 0 and
+            b.state=0 and
+            b.deleteState=0
+
+        order by a.createTime desc
+    </select>
+
+</mapper>
+

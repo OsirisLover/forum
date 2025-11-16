@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forum2.dao.ArticleReplyMapper">
+  <resultMap extends="BaseResultMap" id="AllInfoResultMap" type="com.example.forum2.model.ArticleReply" >
+    <association property="user" resultMap="com.example.forum2.dao.UserMapper.BaseResultMap" columnPrefix="u_">
+      
+    </association>
+
+  </resultMap>
+<select id="selectByArticleId"  parameterType="java.lang.Long" resultMap="AllInfoResultMap">
+  select
+    u.id as u_id,
+    u.nickname as u_nickname,
+    u.gender as u_gender,
+    u.avatarUrl as u_avatarUrl,
+    a.*
+  from t_user as u,t_article_reply as a
+  where  a.articleId=#{articleId,jdbcType=BIGINT}
+    and  a.postUserId=u.id
+    and  a.state=0
+    and  a.deleteState=0
+
+</select>
+</mapper>
